@@ -87,7 +87,7 @@ Lint/UnreachableLoop:
 
 Metrics/AbcSize:
   Description: Checks that the ABC size of methods is not higher than the configured maximum.
-  Max: 15
+  Max: 18
 
 Metrics/BlockLength:
   Description: Checks if the length of a block exceeds some maximum value.
@@ -105,7 +105,7 @@ Metrics/ClassLength:
 Metrics/MethodLength:
   Description: Checks if the length of a method exceeds some maximum value.
   CountComments: false
-  Max: 13
+  Max: 15
 
 Metrics/ParameterLists:
   Description: Avoid parameter lists longer than three or four parameters.
