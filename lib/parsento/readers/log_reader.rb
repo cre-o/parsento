@@ -16,9 +16,9 @@ module Parsento
     private
 
       def print_stats(pages_h, options)
-        sort_by_visits(pages_h).each { |a| print "#{a[0]} #{a[1][:visits]} visits\n" }
+        sort_by(pages_h, :visits).each { |a| print "#{a[0]} #{a[1][:visits]} visits\n" }
         print "\n\e[1m#{options[:lists_separator]}\e[0m\n\n"
-        sort_by_unique_views(pages_h).each { |a| print "#{a[0]} #{a[1][:unique_ips_count]} unique views\n" }
+        sort_by(pages_h, :unique_ips_count).each { |a| print "#{a[0]} #{a[1][:unique_ips_count]} unique views\n" }
       end
 
       def store_in_hash(raw_array, pages_h = {})
@@ -41,12 +41,8 @@ module Parsento
         pages_h
       end
 
-      def sort_by_visits(pages_h)
-        pages_h.sort { |s1, s2| s2[1][:visits] <=> s1[1][:visits] }
-      end
-
-      def sort_by_unique_views(pages_h)
-        pages_h.sort { |s1, s2| s2[1][:unique_ips_count] <=> s1[1][:unique_ips_count] }
+      def sort_by(pages_h, type)
+        pages_h.sort { |s1, s2| s2[1][type.to_sym] <=> s1[1][type.to_sym] }
       end
     end
   end
