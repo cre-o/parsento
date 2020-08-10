@@ -9,3 +9,5 @@ end
 require_relative '../config/boot'
 require_relative '../config/application'
 
+opts = Parsento::CLI.parse_options
+Parsento::CLI.run(opts)
