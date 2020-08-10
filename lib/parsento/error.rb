@@ -11,4 +11,5 @@ module Parsento
       @option = option
     end
   end
+  class ValidationError < Error; end
 end
