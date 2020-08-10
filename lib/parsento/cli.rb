@@ -33,7 +33,7 @@ module Parsento
         end
       end
 
-      private
+    private
 
       def print_and_exit(text)
         $stdout.puts(text)
