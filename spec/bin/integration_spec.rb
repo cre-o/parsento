@@ -5,6 +5,7 @@ require 'helper_methods'
 
 describe 'Application integration testing' do
   let(:valid_file_path) { source_fixture('example.log') }
+  let(:invalid_file_path) { '/!/location/not/valid' }
 
   before(:each) { @cmd_out = nil }
 
@@ -33,6 +34,11 @@ describe 'Application integration testing' do
     it '"Invalid option" message' do
       Open3.popen2("./bin/parsento #{incorrect_option} #{valid_file_path}") { |_i, o, _t| @cmd_out = o.gets(nil) }
       expect(@cmd_out).to include("Invalid option \"#{incorrect_option}\"")
+    end
+
+    it 'Displays help if file_path is incorrect' do
+      Open3.popen2("./bin/parsento #{invalid_file_path}") { |_i, o, _t| @cmd_out = o.gets(nil) }
+      expect(@cmd_out).to include("./bin/parsento [options] [file_path]*")
     end
   end
 end
