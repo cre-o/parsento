@@ -4,6 +4,8 @@ require 'open3'
 require 'helper_methods'
 
 describe 'Application integration testing' do
+  let(:valid_file_path) { source_fixture('example.log') }
+
   before(:each) { @cmd_out = nil }
 
   context 'Shows help message' do
@@ -21,9 +23,16 @@ describe 'Application integration testing' do
   end
 
   context 'Shows human readable error messages' do
+    let(:incorrect_option) { '-alxmanjsjc' }
+
     it 'No command line options defined!' do
-      Open3.popen2("./bin/parsento") { |_i, o, _t| @cmd_out = o.gets(nil) }
+      Open3.popen2('./bin/parsento') { |_i, o, _t| @cmd_out = o.gets(nil) }
       expect(@cmd_out).to include('No command line options defined!')
+    end
+
+    it '"Invalid option" message' do
+      Open3.popen2("./bin/parsento #{incorrect_option} #{valid_file_path}") { |_i, o, _t| @cmd_out = o.gets(nil) }
+      expect(@cmd_out).to include("Invalid option \"#{incorrect_option}\"")
     end
   end
 end
