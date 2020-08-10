@@ -5,6 +5,7 @@ require_relative 'readers/log_reader'
 module Parsento
   # Reading logic for the input file
   class Reader
+    # Wraps .log files reader
     module Log
       extend Parsento::Readers::Log
     end
