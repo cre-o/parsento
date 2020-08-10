@@ -5,12 +5,10 @@ module Parsento
   class CLI
     class << self
       def parse_options
-        print_and_exit "No command line options defined! #{colorize('Use --help')} for getting help." if ARGV.empty?
+        display_help
 
         begin
           raise Parsento::CLIOptionsError unless file_path_defined? && valid_args
-
-          print_and_exit(help_text) if help_needed? # Display help
         rescue Parsento::CLIOptionsError
           print_and_exit help_text
         rescue Parsento::InvalidOptionError => e
@@ -40,14 +38,19 @@ module Parsento
         Kernel.exit
       end
 
+      def display_help
+        print_and_exit "No command line options defined! #{colorize('Use --help')} for getting help." if ARGV.empty?
+        print_and_exit(help_text) if help_needed?
+      end
+
       def help_needed?
-        @valid_args.include?('-h') || @valid_args.include?('--help')
+        ARGV.include?('-h') || ARGV.include?('--help')
       end
 
       def valid_args
         args = file_path_defined? ? ARGV[0..-2] : ARGV
         @valid_args ||= args.map do |arg|
-          known_options.include?(arg) ? arg : raise(Parsento::InvalidOptionError.new(arg))
+          known_options.include?(arg) ? arg : raise(Parsento::InvalidOptionError.new(arg), nil)
         end.compact
       end
 

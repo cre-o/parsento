@@ -20,7 +20,7 @@ describe 'Application integration testing' do
     it 'For unique views' do
       Open3.popen2("#{env_flag} ./bin/parsento #{valid_file_path}") { |_i, o, _t| @cmd_out = o.gets(nil) }
       expect(@cmd_out).to include('/help_page/1 23 unique views')
-      expect(@cmd_out).to include("/about 21 unique views\n\n") # Which means it is the last record
+      expect(@cmd_out).to include("/about 21 unique views\n")
     end
 
     it 'For •ᴗ•' do

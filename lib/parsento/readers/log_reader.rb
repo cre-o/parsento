@@ -17,15 +17,11 @@ module Parsento
 
       def print_stats(pages_h, options)
         sort_by_visits(pages_h).each { |a| print "#{a[0]} #{a[1][:visits]} visits\n" }
-        print "\n"
-        print "\e[1m#{options[:lists_separator]}\e[0m"
-        print "\n\n"
+        print "\n\e[1m#{options[:lists_separator]}\e[0m\n\n"
         sort_by_unique_views(pages_h).each { |a| print "#{a[0]} #{a[1][:unique_ips_count]} unique views\n" }
-        print "\n"
       end
 
-      def store_in_hash(raw_array)
-        pages_h = {}
+      def store_in_hash(raw_array, pages_h = {})
         raw_array.each do |v|
           spltd = v.split
           page  = spltd.first
