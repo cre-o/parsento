@@ -18,8 +18,8 @@ module Parsento
     end
 
     class << self
-      def start(file_to_read, file_type = :log)
-        new(Parsento::Reader.new(file_to_read, file_type)).start
+      def start(options)
+        new(Parsento::Reader.new(options)).start
       end
     end
 

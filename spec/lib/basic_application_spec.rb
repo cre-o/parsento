@@ -4,7 +4,7 @@ require 'rspec_helper'
 
 describe Parsento::BasicApplication do
   let(:valid_file_path) { source_fixture('example.log') }
-  let(:reader) { Parsento::Reader.new(valid_file_path, :log) }
+  let(:reader) { Parsento::Reader.new({file: valid_file_path}) }
 
   subject { Parsento::BasicApplication.new(reader) }
 

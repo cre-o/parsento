@@ -21,11 +21,11 @@ module Parsento
         }
       end
 
-      def run(opts)
+      def run(options)
         if Parsento.const_defined?('Application')
-          Application.start(opts[:file], opts[:args])
+          Application.start(options)
         else # Or we can initialize it with injection
-          reader = Parsento::Reader.new(opts[:file], opts[:args])
+          reader = Parsento::Reader.new(options)
           app = BasicApplication.new(reader)
           app.start
         end

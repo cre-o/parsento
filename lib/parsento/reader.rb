@@ -11,9 +11,9 @@ module Parsento
     end
     # @TODO create XML reader
 
-    def initialize(file_path, options)
-      @file_path = file_path
-      @options   = options
+    def initialize(options)
+      @file_path = options[:file]
+      @args      = options[:args]
 
       run_validations
     end
