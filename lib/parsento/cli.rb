@@ -22,6 +22,10 @@ module Parsento
       def colorize(text)
         "\e[1m#{text}\e[0m"
       end
+
+      def known_options
+        %w[-h --help]
+      end
     end
   end
 end
