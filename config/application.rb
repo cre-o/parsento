@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# @TODO create new GEM
 require_relative '../lib/parsento'
 
 Bundler.require(:default, :development)
