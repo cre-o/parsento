@@ -8,6 +8,13 @@ Bundler.require(:default, :development)
 module Parsento
   # Extended Application, configured with the current ENV
   class Application < Parsento::BasicApplication
-
+    def initialize(reader)
+      super
+      @reader_options = {
+        production: {max_lines: 1000, lists_separator: '¯\_(ツ)_/¯'},
+        development: {max_lines: 3000, lists_separator: '(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧'},
+        test: {max_lines: 1000, lists_separator: '•ᴗ•'}
+      }
+    end
   end
 end

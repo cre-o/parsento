@@ -6,17 +6,31 @@ module Parsento
     def initialize(reader)
       # @TODO make validation
       @reader = reader
+      @reader_options = {
+        production: {max_lines: 500, lists_separator: ''},
+        development: {max_lines: 1000, lists_separator: ''},
+        test: {max_lines: 500, lists_separator: ''}
+      }
     end
 
-    # @TODO pass additional options to the parser
     def start
-      @reader.parse
+      @reader.parse with_options
     end
 
     class << self
       def start(file_to_read, file_type = :log)
         new(Parsento::Reader.new(file_to_read, file_type)).start
       end
+    end
+
+  protected
+
+    def current_env
+      (ENV['PARSENTO_ENV'] || 'development').to_sym
+    end
+
+    def with_options
+      @reader_options.key?(current_env) ? @reader_options[current_env] : @reader_options[:development]
     end
   end
 end

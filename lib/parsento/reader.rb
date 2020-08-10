@@ -19,9 +19,9 @@ module Parsento
 
     # By default (and for simplicity) only one parser engine is configured
     # Other engines can be connected at the top of current class and called here by file extension
-    def parse
+    def parse(parser_options)
       if file_ext == '.log'
-        Log.parse(@file_path)
+        Log.parse(@file_path, parser_options)
       else
         raise Parsento::ValidationError, "Correct reader engine for selected #{file_ext} file was not found."
       end
