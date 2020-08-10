@@ -4,11 +4,11 @@ module Parsento
   # Manage command line options
   class CLI
     class << self
-      def parse_options(args = ARGV)
-        print_and_exit "No command line options defined! #{colorize('Use --help')} for getting help." if args.empty?
+      def parse_options
+        print_and_exit "No command line options defined! #{colorize('Use --help')} for getting help." if ARGV.empty?
 
         begin
-          raise Parsento::CLIOptionsError unless file_path_defined?(args) && valid_args(args)
+          raise Parsento::CLIOptionsError unless file_path_defined? && valid_args
 
           print_and_exit(help_text) if help_needed? # Display help
         rescue Parsento::CLIOptionsError
@@ -16,10 +16,21 @@ module Parsento
         rescue Parsento::InvalidOptionError => e
           print_and_exit "Invalid option #{e.option.inspect}"
         end
+
+        {
+          file: file_path,
+          args: @valid_args
+        }
       end
 
       def run(opts)
-
+        if Parsento.const_defined?('Application')
+          Application.start(opts[:file], opts[:args])
+        else # Or we can initialize it with injection
+          reader = Parsento::Reader.new(opts[:file], opts[:args])
+          app = BasicApplication.new(reader)
+          app.start
+        end
       end
 
       private
@@ -33,15 +44,19 @@ module Parsento
         @valid_args.include?('-h') || @valid_args.include?('--help')
       end
 
-      def valid_args(args)
-        args = args[0..-2] if file_path_defined?(args)
+      def valid_args
+        args = file_path_defined? ? ARGV[0..-2] : ARGV
         @valid_args ||= args.map do |arg|
           known_options.include?(arg) ? arg : raise(Parsento::InvalidOptionError.new(arg))
         end.compact
       end
 
-      def file_path_defined?(args)
-        File.file?(args.last)
+      def file_path_defined?
+        File.file?(ARGV.last)
+      end
+
+      def file_path
+        ARGV.last
       end
 
       def help_text
