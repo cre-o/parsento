@@ -38,7 +38,7 @@ describe 'Application integration testing' do
 
     it 'Displays help if file_path is incorrect' do
       Open3.popen2("./bin/parsento #{invalid_file_path}") { |_i, o, _t| @cmd_out = o.gets(nil) }
-      expect(@cmd_out).to include("./bin/parsento [options] [file_path]*")
+      expect(@cmd_out).to include('./bin/parsento [options] [file_path]*')
     end
   end
 end
