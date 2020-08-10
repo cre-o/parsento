@@ -13,6 +13,8 @@ module Parsento
           print_and_exit(help_text) if help_needed? # Display help
         rescue Parsento::CLIOptionsError
           print_and_exit help_text
+        rescue Parsento::InvalidOptionError => e
+          print_and_exit "Invalid option #{e.option.inspect}"
         end
       end
 
