@@ -42,7 +42,7 @@ module Parsento
       end
 
       def sort_by(pages_h, type)
-        pages_h.sort { |s1, s2| s2[1][type.to_sym] <=> s1[1][type.to_sym] }
+        pages_h.sort { |a, b| b[1][type.to_sym] <=> a[1][type.to_sym] }
       end
     end
   end
