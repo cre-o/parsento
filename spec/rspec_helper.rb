@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'helper_methods'
+
 ENV['PARSENTO_ENV'] ||= 'test'
 
 Bundler.require(:default, :test)
