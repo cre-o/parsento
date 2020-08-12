@@ -43,6 +43,8 @@ RSpec
 Code style
 `bundle exec rubocop`
 
+ 
+-----
 
 Made with fun & :heart:
 by Siarhei Shukhta (aka cre-o)
