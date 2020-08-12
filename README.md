@@ -26,9 +26,12 @@ e.g.:
 ## Installation
 `git clone https://github.com/cre-o/parsento.git`
 
+`cd parsento`
 `rbenv install 2.7.1` 
 `gem install bundler`
 `bundle install`
+
+Finally, run it `./bin/parsento`
 
 ### Development
 `bundle exec guard`
@@ -39,3 +42,7 @@ RSpec
 
 Code style
 `bundle exec rubocop`
+
+
+Made with fun & :heart:
+by Siarhei Shukhta (aka cre-o)
