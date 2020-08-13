@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Parsento
   # Extends knowledge about available readers
   module LogStrategy

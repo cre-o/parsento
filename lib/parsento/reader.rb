@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Require all readers
-Dir[File.join(__dir__, 'readers', '*_reader.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'readers', '*_reader.rb')].sort.each { |file| require file }
 
 module Parsento
   # Reading logic for the input file

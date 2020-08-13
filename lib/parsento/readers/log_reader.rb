@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'strategies/log_strategy'
 
 module Parsento
@@ -12,7 +13,7 @@ module Parsento
     end
 
     def read
-      #... if options has an option "how to build" or display default strategy...
+      # ...if options has an option "how to build" or display default strategy...
       LogStrategy.sort_by_page_views self
       LogStrategy.display_separator self
       LogStrategy.sort_by_unique_page_views self
