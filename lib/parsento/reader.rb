@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
-require_relative 'readers/log_reader'
+# Require all readers
+Dir[File.join(__dir__, 'readers', '*_reader.rb')].each { |file| require file }
 
 module Parsento
   # Reading logic for the input file
   class Reader
-    # Wraps .log files reader
-    module Log
-      extend Parsento::Readers::Log
-    end
     # @TODO create XML reader
+    attr_accessor :options
 
     def initialize(options)
       @file_path = options[:file]
@@ -22,7 +20,8 @@ module Parsento
     # Other engines can be connected at the top of current class and called here by file extension
     def parse(parser_options)
       if file_ext == '.log'
-        Log.parse(@file_path, parser_options)
+        log_reader = LogReader.new(@file_path, parser_options)
+        log_reader.read
       else
         raise Parsento::ValidationError, "Correct reader engine for selected #{file_ext} file was not found."
       end
