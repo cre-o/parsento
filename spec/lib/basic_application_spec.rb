@@ -9,8 +9,4 @@ describe Parsento::BasicApplication do
   subject { Parsento::BasicApplication.new(reader) }
 
   it { is_expected.to respond_to(:start) }
-
-  it '.start' do
-    expect(described_class.respond_to?(:start)).to be_truthy
-  end
 end
