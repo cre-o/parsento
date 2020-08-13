@@ -17,12 +17,6 @@ module Parsento
       @reader.parse with_options
     end
 
-    class << self
-      def start(options)
-        new(Parsento::Reader.new(options)).start
-      end
-    end
-
   protected
 
     def current_env

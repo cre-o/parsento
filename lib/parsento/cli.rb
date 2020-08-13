@@ -22,13 +22,9 @@ module Parsento
       end
 
       def run(options)
-        if Parsento.const_defined?('Application')
-          Application.start(options)
-        else # Or we can initialize it with injection
-          reader = Parsento::Reader.new(options)
-          app = BasicApplication.new(reader)
-          app.start
-        end
+        reader = Parsento::Reader.new(options)
+        app = Parsento.const_defined?('Application') ? Application.new(reader) : BasicApplication.new(reader)
+        app.start
       end
 
     private
