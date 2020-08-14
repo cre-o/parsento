@@ -7,7 +7,7 @@ module Parsento
   # Reading logic for the input file
   class Reader
     # @TODO create XML reader
-    attr_accessor :options
+    attr_reader :options
 
     def initialize(options)
       @file_path = options[:file]
