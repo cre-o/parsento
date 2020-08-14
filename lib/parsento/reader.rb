@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # Require all readers
+# @TODO create XML reader
 Dir[File.join(__dir__, 'readers', '*_reader.rb')].sort.each { |file| require file }
 
 module Parsento
   # Reading logic for the input file
   class Reader
-    # @TODO create XML reader
     attr_reader :options
 
     def initialize(options)
