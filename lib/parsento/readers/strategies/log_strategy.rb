@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Parsento
-  # Extends knowledge about available readers
+  # Extends knowledge about available parsing strategies
   module LogStrategy
     def self.sort_by_page_views(reader)
       calculator = Calculate.new(reader.file_path)
